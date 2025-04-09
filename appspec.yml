@@ -1,0 +1,12 @@
+version: 0.0
+Resources:
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        ClusterName: WildRydesCluster
+        ServiceName: wild-rydes-service
+        TaskDefinition: wild-rydes-task:1
+        LoadBalancers:
+          - ContainerName: wild-rydes-container
+            ContainerPort: 80
+            TargetGroupArn: arn:aws:elasticloadbalancing:us-east-1:739275462844:targetgroup/wild-rydes-target-group

@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      docker: 18
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Build docker image
+      - docker build -t wild-rydes .
+      - docker tag wild-rydes:latest 739275462844.dkr.ecr.us-east-1.amazonaws.com/wild-rydes-repo:latest
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing Docker image to ECR
+      - docker push 739275462844.dkr.ecr.us-east-1.amazonaws.com/wild-rydes-repo:latest
+
+artifacts:
+  files:
+    - '**/*'
